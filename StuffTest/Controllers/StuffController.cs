@@ -8,7 +8,7 @@ using System.Linq;
 namespace StuffTest.Controllers
 {
     /// <summary>
-    /// Контроллер персонала
+    /// РљРѕРЅС‚СЂРѕР»Р»РµСЂ РїРµСЂСЃРѕРЅР°Р»Р°
     /// </summary>
     [ApiController]
     [Route("[controller]")]
@@ -21,7 +21,7 @@ namespace StuffTest.Controllers
         private readonly IPositionRepository _position;
         private readonly IMapper _mapper;
         /// <summary>
-        /// Конструктор контроллера персонала
+        /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРЅС‚СЂРѕР»Р»РµСЂР° РїРµСЂСЃРѕРЅР°Р»Р°
         /// </summary>
         /// <param name="userRepository"></param>
         /// <param name="position"></param>
@@ -35,7 +35,7 @@ namespace StuffTest.Controllers
             _position = position;
         }
         /// <summary>
-        /// Получение списка всех пользователей системы
+        /// РџРѕР»СѓС‡РµРЅРёРµ СЃРїРёСЃРєР° РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЃРёСЃС‚РµРјС‹
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -51,13 +51,13 @@ namespace StuffTest.Controllers
             catch (Exception e)
             {
                 var model = new ErrorModel();
-                model.Message = $"Что то пошло не так. CorrelationId: {model.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {model.CorrelationId}", e);
+                model.Message = $"Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. CorrelationId: {model.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {model.CorrelationId}", e);
                 return BadRequest(e.Message);
             }
         }
         /// <summary>
-        /// Получение одного пользователя
+        /// РџРѕР»СѓС‡РµРЅРёРµ РѕРґРЅРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -77,14 +77,14 @@ namespace StuffTest.Controllers
             catch (Exception e)
             {
                 var model = new ErrorModel();
-                model.Message = $"Что то пошло не так. CorrelationId: {model.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {model.CorrelationId}", e);
+                model.Message = $"Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. CorrelationId: {model.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {model.CorrelationId}", e);
                 return BadRequest(e.Message);
             }
         }
 
         /// <summary>
-        /// Удаление пользователя
+        /// РЈРґР°Р»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -101,16 +101,16 @@ namespace StuffTest.Controllers
             catch (Exception e)
             {
                 var model = new ErrorModel();
-                model.Message = $"Что то пошло не так. CorrelationId: {model.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {model.CorrelationId}", e);
+                model.Message = $"Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. CorrelationId: {model.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {model.CorrelationId}", e);
                 return BadRequest(e.Message);
             }
         }
         /// <summary>
-        /// Обновление записи
+        /// РћР±РЅРѕРІР»РµРЅРёРµ Р·Р°РїРёСЃРё
         /// </summary>
-        /// <param name="id">Идентификатор</param>
-        /// <param name="model">Модель пользователя</param>
+        /// <param name="id">РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ</param>
+        /// <param name="model">РњРѕРґРµР»СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</param>
         /// <returns></returns>
         [HttpPut("{id}")]
         public ActionResult<Guid> Update([FromRoute] Guid id, [FromBody] UserModel model)
@@ -119,9 +119,9 @@ namespace StuffTest.Controllers
             try
             {
                 var position = _position.GetSingle(x => x.Name == model.Position);
-                if (position == null) return BadRequest(new ErrorModel { Message = "Роль не найдена" });
+                if (position == null) return BadRequest(new ErrorModel { Message = "Р РѕР»СЊ РЅРµ РЅР°Р№РґРµРЅР°" });
                 var user = _user.GetSingle(x => x.Id == id);
-                if (user == null) return BadRequest(new ErrorModel { Message = "Пользователь не найден" });
+                if (user == null) return BadRequest(new ErrorModel { Message = "РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ РЅРµ РЅР°Р№РґРµРЅ" });
                 user.FirstName = model.FirstName;
                 user.LastName = model.LastName;
                 user.MiddleName = model.MiddleName;
@@ -138,24 +138,24 @@ namespace StuffTest.Controllers
                 if (db.InnerException.Message.Contains("UNIQUE constraint failed: users.FirstName, users.LastName, users.MiddleName"))
                 {
 
-                    emodel.Message = $"Фамилия Имя и Отчество должны быть уникальными. CorrelationId: {emodel.CorrelationId}";
-                    _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", db);
+                    emodel.Message = $"Р¤Р°РјРёР»РёСЏ РРјСЏ Рё РћС‚С‡РµСЃС‚РІРѕ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹РјРё. CorrelationId: {emodel.CorrelationId}";
+                    _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", db);
                     return BadRequest(emodel);
                 }
-                emodel.Message = $"Все совсем плохо. CorrelationId: {emodel.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", db);
+                emodel.Message = $"Р’СЃРµ СЃРѕРІСЃРµРј РїР»РѕС…Рѕ. CorrelationId: {emodel.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", db);
                 return BadRequest(emodel);
             }
             catch (Exception e)
             {
                 var emodel = new ErrorModel();
-                emodel.Message = $"Что то пошло не так. CorrelationId: {emodel.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", e);
+                emodel.Message = $"Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. CorrelationId: {emodel.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", e);
                 return BadRequest(emodel);
             }
         }
         /// <summary>
-        /// Создание пользователя
+        /// РЎРѕР·РґР°РЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -166,7 +166,7 @@ namespace StuffTest.Controllers
             try
             {
                 var position = _position.GetSingle(x => x.Name == model.Position);
-                if (position == null) return BadRequest(new ErrorModel { Message = "Роль не найдена" });
+                if (position == null) return BadRequest(new ErrorModel { Message = "Р РѕР»СЊ РЅРµ РЅР°Р№РґРµРЅР°" });
                 _user.Add(new User
                 {
                     FirstName = model.FirstName,
@@ -185,19 +185,19 @@ namespace StuffTest.Controllers
                 if (db.InnerException.Message.Contains("UNIQUE constraint failed: users.FirstName, users.LastName, users.MiddleName"))
                 {
 
-                    emodel.Message = $"Фамилия Имя и Отчество должны быть уникальными. CorrelationId: {emodel.CorrelationId}";
-                    _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", db);
+                    emodel.Message = $"Р¤Р°РјРёР»РёСЏ РРјСЏ Рё РћС‚С‡РµСЃС‚РІРѕ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ СѓРЅРёРєР°Р»СЊРЅС‹РјРё. CorrelationId: {emodel.CorrelationId}";
+                    _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", db);
                     return BadRequest(emodel);
                 }
-                emodel.Message = $"Все совсем плохо. CorrelationId: {emodel.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", db);
+                emodel.Message = $"Р’СЃРµ СЃРѕРІСЃРµРј РїР»РѕС…Рѕ. CorrelationId: {emodel.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", db);
                 return BadRequest(emodel);
             }
             catch (Exception e)
             {
                 var emodel = new ErrorModel();
-                emodel.Message = $"Что то пошло не так. CorrelationId: {emodel.CorrelationId}";
-                _logger.LogError($"Произошла ошибка CorrelationId: {emodel.CorrelationId}", e);
+                emodel.Message = $"Р§С‚Рѕ С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє. CorrelationId: {emodel.CorrelationId}";
+                _logger.LogError($"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° CorrelationId: {emodel.CorrelationId}", e);
                 return BadRequest(emodel);
             }
         }
